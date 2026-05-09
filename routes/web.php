@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+Route::get('/cours', function () {
+    return view('cours');
+})->name('cours');
 Route::get('/cours', [CourseController::class, 'index']);

@@ -625,22 +625,37 @@
     .hero-stats             { gap: 20px; padding: 16px; }
     .hero-stat .val         { font-size: 20px; }
   }
+    
+   .navbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; z-index: 100;
+      background: rgba(0, 0, 0, 0.1); backdrop-filter: blur(120vh);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { font-weight: 800; font-size: 20px; color: #fff; letter-spacing: -0.5px; }
+    .nav-logo span { color: #c4b5fd; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: #9ca3af; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #a78bfa; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .btn-nav { padding: 8px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .btn-nav-primary { color: #fff; background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+    .btn-nav-primary:hover { transform: scale(1.05); }
 </style>
 </head>
 <body>
   <!-- ══════════════ NAVBAR ══════════════ -->
-  <nav id="navbar">
-    <img class="nav-logo"
-         src="https://readdy.ai/api/search-image?query=modern minimalist logo design for a coding education platform called CodeLearn featuring a stylized code slash symbol inside a rounded square with purple gradient background from deep violet to magenta on a dark navy background clean geometric vector style professional tech branding high quality crisp edges&width=512&height=512&seq=codelearn-logo&orientation=squarish
-"
-         alt="EduLearn" />
+  
+    <nav class="navbar">
+    <div style="margin-top:10px;" class="nav-logo">Code<span>Master</span></div>
     <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#courses-page" class="active">
-            <i class="ri-book-open-line"></i> Courses</a></li>
-      <li><a href="#">Features</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="/home">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
+    
     <div class="nav-right">
       <button class="user-btn">
         <div class="avatar">R</div>
@@ -779,7 +794,7 @@
      
     </main>
     <div class="footer-note">
-      &copy; 2026 EduLearn &nbsp;·&nbsp;
+      &copy; 2026 CodeMaster &nbsp;·&nbsp;
       <a href="#">Privacy</a> &nbsp;·&nbsp;
       <a href="#">Terms</a>
     </div>
