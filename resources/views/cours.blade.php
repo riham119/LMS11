@@ -506,6 +506,9 @@
     border-bottom: 1px solid rgba(255,255,255,.08);
     padding: 12px 0; position: sticky; top: 0; z-index: 40;
     transition: box-shadow .3s;
+    a {
+  text-decoration: none;
+}
   }
   .filter-bar.shadow { box-shadow: 0 4px 24px rgba(0,0,0,.4); }
   .filter-inner {
@@ -642,6 +645,50 @@
     .btn-nav { padding: 8px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
     .btn-nav-primary { color: #fff; background: linear-gradient(135deg, #7c3aed, #4f46e5); }
     .btn-nav-primary:hover { transform: scale(1.05); }
+    .hero-search{
+    position: relative;
+    width: 500px;
+}
+
+.hero-search input{
+    width: 100%;
+    padding: 15px 120px 15px 50px;
+    border-radius: 50px;
+    border: 1px solid #6388cc93;
+    background-color: #0f1a2e93;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-icon{
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 20px;
+}
+
+.search-btn{
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background-color: #6388cc;
+    border: none;
+    color: white;
+
+    padding: 8px 18px;
+    border-radius: 30px;
+
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -668,44 +715,92 @@
   <!-- ══════════════ COURSES PAGE ══════════════ -->
   <div id="courses-page">
     <!-- Hero -->
+  
     <section class="courses-hero">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="eyebrow">
-        <i class="ri-graduation-cap-line"></i> Expert-Led Courses
-      </div>
-      <h1>Explore <span class="grad-text">Courses</span></h1>
-      <p class="sub">Master programming with expert-led video courses.
-         Pick a language and start building today.</p>
-      <div class="hero-search">
-        <i class="ri-search-line"></i>
-        <input type="text" id="heroSearch"
-               placeholder="Search courses, topics, or instructors…" />
-      </div>
-    </section>
-    <!-- Filter bar -->
-    <div class="filter-bar" id="filterBar">
-      <div class="filter-inner">
-        <div class="pill-bar" id="categoryPills">
-          <button class="pill active" data-cat="All">All</button>
-          <button class="pill" data-cat="Programming">Programming</button>
-          <button class="pill" data-cat="Web Development">Web Development</button>
-          <button class="pill" data-cat="Frontend">Frontend</button>
-          <button class="pill" data-cat="Backend">Backend</button>
-        </div>
-      </div>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="eyebrow">
+        <i class="ri-graduation-cap-line"></i>
+        Expert-Led Courses
     </div>
+
+    <h1>
+        Explore <span class="grad-text">Courses</span>
+    </h1>
+
+    <p class="sub">
+        Master programming with expert-led video courses.
+        Pick a language and start building today.
+    </p>
+
+    <!-- SEARCH FORM -->
+    <form action="{{route('cours')}}" method="GET">
+
+        <div class="hero-search">
+
+            <i  class="ri-search-line"></i>
+
+            <input
+                type="text"
+                id="heroSearch"
+                name="search"
+                placeholder="Search courses..."
+                value="{{ request('search') }}"
+            />
+
+            <button type="submit" class="search-btn">
+        Search
+    </button>
+
+        </div>
+
+    </form>
+
+</section>
+    <!-- Filter bar -->
+ 
+    <div class="filter-bar" id="filterBar">
+  <div class="filter-inner">
+    <div class="pill-bar" id="categoryPills">
+
+      <a href="{{ route('cours') }}"
+         class="pill {{ request('level') ? '' : 'active' }}">
+        All
+      </a>
+
+      <a href="{{ route('cours', ['level' => 'Beginner']) }}"
+         class="pill {{ request('level') == 'Beginner' ? 'active' : '' }}">
+        Beginner
+      </a>
+
+      <a href="{{ route('cours', ['level' => 'Intermediate']) }}"
+         class="pill {{ request('level') == 'Intermediate' ? 'active' : '' }}">
+        Intermediate
+      </a>
+
+      <a href="{{ route('cours', ['level' => 'Advanced']) }}"
+         class="pill {{ request('level') == 'Advanced' ? 'active' : '' }}">
+        Advanced
+      </a>
+
+    </div>
+  </div>
+</div>
     <!-- Main -->
     <main class="courses-main">
       <div class="courses-header">
         <div>
-          <h3><span class="grad-text" id="resultCount">9</span> Courses Found</h3>
+          <h3><span class="grad-text" id="resultCount">
+            {{$courses->count()}}
+          </span> Courses Found</h3>
           <p>Showing all available courses</p>
         </div>
      
       </div>
       <div class="courses-grid" id="coursesGrid">
-        <!-- cards go here — same 9 cards from before -->
+      
 
          
         <!-- Cards from db -->

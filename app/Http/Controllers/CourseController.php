@@ -11,9 +11,26 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function index()
+
+public function index(Request $request)
 {
-    $courses = Course::with(['module', 'difficulty'])->get();
+    $search = $request->search;
+    $level=$request->level;
+
+    $courses = Course::with(['module', 'difficulty'])
+
+        ->when($search, function ($query, $search) {
+
+            $query->where('title', 'like', "%{$search}%");
+
+        })
+         ->when($level, function ($query, $level) {
+            $query->whereHas('difficulty', function ($q) use ($level) {
+                $q->where('levelName', $level);
+            });
+         })
+        ->get();
+
     return view('cours', compact('courses'));
 }
 

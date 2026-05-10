@@ -22,4 +22,5 @@ Route::get('/home', function () {
 Route::get('/cours', function () {
     return view('cours');
 })->name('cours');
-Route::get('/cours', [CourseController::class, 'index']);
+Route::get('/cours', [CourseController::class, 'index'])
+    ->name('cours');
