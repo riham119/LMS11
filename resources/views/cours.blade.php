@@ -578,7 +578,7 @@
     .nav-links { display: none; }
   }
   
-/* ── Course Card ── */
+
 
 
 
