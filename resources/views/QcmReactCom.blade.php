@@ -188,11 +188,12 @@
     /* FEEDBACK */
 
     .feedback-box{
-      margin-top:10px;
+      margin-top:20px;
       padding:20px;
       border-radius:16px;
       border:1px solid rgba(239,68,68,0.35);
       background:rgba(239,68,68,0.12);
+      display:none;
       animation:fadeIn .3s ease;
     }
 
@@ -287,7 +288,7 @@
   <!-- TITLE -->
 
   <div class="course-title">
-    <h1>Complete Python Programming</h1>
+    <h1>React.js Complete Guide</h1>
   </div>
 
   <!-- LAYOUT -->
@@ -330,6 +331,19 @@
 
       </div>
 
+      <!-- FEEDBACK -->
+
+      <div class="feedback-box" id="feedbackBox">
+
+        <div class="feedback-title">
+          <i class="ri-close-circle-line"></i>
+          Incorrect Answer
+        </div>
+
+        <p id="feedbackText"></p>
+
+      </div>
+
       <!-- RESULT -->
 
       <div class="result-box" id="resultBox">
@@ -356,52 +370,47 @@ const questions = [
 
   {
     id:1,
-    question:"Which of the following is used to define a function in Python?",
-    options:["function","def","func","define"],
+    question:"Which hook is used to manage state in functional components?",
+    options:["useEffect","useState","useContext","useReducer"],
     correctAnswer:1,
-    explanation:"The 'def' keyword is used to define functions in Python."
+    explanation:"useState is the React hook used to add and manage state inside functional components."
   },
 
   {
     id:2,
-    question:"What is the output of `print(type([]))` in Python?",
-    options:[
-      "<class 'list'>",
-      "<class 'array'>",
-      "<class 'tuple'>",
-      "<class 'dict'>"
-    ],
-    correctAnswer:0,
-    explanation:"An empty square bracket [] creates a list object in Python."
+    question:"What does the `useEffect` hook do?",
+    options:["Manages component state","Handles side effects in components","Creates refs","Optimizes performance"],
+    correctAnswer:1,
+    explanation:"useEffect handles side effects like API calls, timers, and DOM updates inside React components."
   },
 
   {
     id:3,
-    question:"Which Python data structure is immutable and ordered?",
-    options:["List","Dictionary","Tuple","Set"],
-    correctAnswer:2,
-    explanation:"Tuples are ordered and immutable in Python."
+    question:"What is JSX in React?",
+    options:["A JavaScript database","A syntax extension for JavaScript","A CSS preprocessor","A routing library"],
+    correctAnswer:1,
+    explanation:"JSX is a syntax extension that lets developers write HTML-like code inside JavaScript."
   },
 
   {
     id:4,
-    question:"What does `__init__` represent in a Python class?",
+    question:"Which hook memoizes a computed value?",
     options:[
-      "Destructor method",
-      "Class constructor",
-      "Module initializer",
-      "String representation"
+      "useCallback",
+      "useMemo",
+      "useRef",
+      "useState"
     ],
     correctAnswer:1,
-    explanation:"__init__ is the constructor method automatically called when creating objects."
+    explanation:"useMemo stores a computed value and recalculates it only when dependencies change."
   },
 
   {
     id:5,
-    question:"Which module in Python is used for working with JSON data?",
-    options:["pickle","json","csv","xml"],
+    question:"What is the Virtual DOM in React?",
+    options:["A real DOM copy","A lightweight JavaScript representation of the DOM","A browser extension","A CSS framework"],
     correctAnswer:1,
-    explanation:"The json module is used to parse and generate JSON data."
+    explanation:"The Virtual DOM is a lightweight JavaScript version of the real DOM used to improve rendering performance."
   }
 
 ];
@@ -484,6 +493,8 @@ function renderQuestion(){
 
   optionsBox.innerHTML = "";
 
+  document.getElementById("feedbackBox").style.display = "none";
+
   q.options.forEach((option,index)=>{
 
     const ans = answers[q.id];
@@ -522,32 +533,6 @@ function renderQuestion(){
 
   });
 
-  const ans = answers[q.id];
-
-  if(ans && !ans.correct){
-
-    optionsBox.innerHTML += `
-
-      <div class="feedback-box">
-
-        <div class="feedback-title">
-
-          <i class="ri-close-circle-line"></i>
-
-          Incorrect
-
-        </div>
-
-        <p>
-          ${q.explanation}
-        </p>
-
-      </div>
-
-    `;
-
-  }
-
   document.getElementById("scoreText").innerText =
   `${correctCount()}/5 Correct`;
 
@@ -571,6 +556,15 @@ function selectOption(index){
 
   renderSidebar();
 
+  if(index !== q.correctAnswer){
+
+    document.getElementById("feedbackBox").style.display = "block";
+
+    document.getElementById("feedbackText").innerText =
+    q.explanation;
+
+  }
+
   setTimeout(() => {
 
     if(currentIndex < questions.length - 1){
@@ -587,7 +581,7 @@ function selectOption(index){
 
     }
 
-  }, 1500);
+  }, 2500);
 
 }
 
@@ -627,6 +621,8 @@ function restartQuiz(){
   answers = {};
 
   document.getElementById("resultBox").style.display = "none";
+
+  document.getElementById("feedbackBox").style.display = "none";
 
   renderQuestion();
 

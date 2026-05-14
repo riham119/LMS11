@@ -287,7 +287,7 @@
   <!-- TITLE -->
 
   <div class="course-title">
-    <h1>Complete Python Programming</h1>
+    <h1>DevOps & CI/CD Pipelines</h1>
   </div>
 
   <!-- LAYOUT -->
@@ -356,52 +356,62 @@ const questions = [
 
   {
     id:1,
-    question:"Which of the following is used to define a function in Python?",
-    options:["function","def","func","define"],
+    question:"What does CI/CD stand for?",
+    options:[
+      "Code Integration / Code Delivery",
+      "Continuous Integration / Continuous Deployment",
+      "Cloud Infrastructure",
+      "Container Integration / Container Delivery"
+    ],
     correctAnswer:1,
-    explanation:"The 'def' keyword is used to define functions in Python."
+    explanation:"CI/CD stands for Continuous Integration and Continuous Deployment."
   },
 
   {
     id:2,
-    question:"What is the output of `print(type([]))` in Python?",
-    options:[
-      "<class 'list'>",
-      "<class 'array'>",
-      "<class 'tuple'>",
-      "<class 'dict'>"
-    ],
+    question:"Which tool is used for containerizing applications?",
+    options:["Docker","Kubernetes","Jenkins","Terraform"],
     correctAnswer:0,
-    explanation:"An empty square bracket [] creates a list object in Python."
+    explanation:"Docker is used to package and containerize applications."
   },
 
   {
     id:3,
-    question:"Which Python data structure is immutable and ordered?",
-    options:["List","Dictionary","Tuple","Set"],
-    correctAnswer:2,
-    explanation:"Tuples are ordered and immutable in Python."
+    question:"What is Kubernetes primarily used for?",
+    options:[
+      "Building containers",
+      "Orchestrating container clusters",
+      "Writing backend code",
+      "Managing databases"
+    ],
+    correctAnswer:1,
+    explanation:"Kubernetes is mainly used for orchestrating and managing container clusters."
   },
 
   {
     id:4,
-    question:"What does `__init__` represent in a Python class?",
+    question:"Which GitHub feature automates workflows on repository events?",
     options:[
-      "Destructor method",
-      "Class constructor",
-      "Module initializer",
-      "String representation"
+      "GitHub Pages",
+      "GitHub Actions",
+      "GitHub Projects",
+      "GitHub Codespaces"
     ],
     correctAnswer:1,
-    explanation:"__init__ is the constructor method automatically called when creating objects."
+    explanation:"GitHub Actions automates workflows like testing and deployment."
   },
 
   {
     id:5,
-    question:"Which module in Python is used for working with JSON data?",
-    options:["pickle","json","csv","xml"],
+    question:"What is the purpose of an Infrastructure as Code (IaC) tool?",
+    options:[
+      "Writing application code",
+      "Automating infrastructure provisioning",
+      "Managing user permissions",
+      "Database optimization"
+    ],
     correctAnswer:1,
-    explanation:"The json module is used to parse and generate JSON data."
+    explanation:"IaC tools automate infrastructure setup and provisioning."
   }
 
 ];

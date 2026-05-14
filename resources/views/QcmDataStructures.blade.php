@@ -287,7 +287,7 @@
   <!-- TITLE -->
 
   <div class="course-title">
-    <h1>Complete Python Programming</h1>
+    <h1>Data Structures & Algorithms</h1>
   </div>
 
   <!-- LAYOUT -->
@@ -356,52 +356,47 @@ const questions = [
 
   {
     id:1,
-    question:"Which of the following is used to define a function in Python?",
-    options:["function","def","func","define"],
+    question:"What is the time complexity of binary search?",
+    options:["O(n)","O(log n)","O(n log n)","O(1)"],
     correctAnswer:1,
-    explanation:"The 'def' keyword is used to define functions in Python."
+    explanation:"Binary search divides the search space in half each step, giving a complexity of O(log n)."
   },
 
   {
     id:2,
-    question:"What is the output of `print(type([]))` in Python?",
-    options:[
-      "<class 'list'>",
-      "<class 'array'>",
-      "<class 'tuple'>",
-      "<class 'dict'>"
-    ],
-    correctAnswer:0,
-    explanation:"An empty square bracket [] creates a list object in Python."
+    question:"Which data structure follows LIFO (Last In, First Out)?",
+    options:["Queue","Stack","Linked List","Heap"],
+    correctAnswer:1,
+    explanation:"A stack follows the Last In, First Out principle."
   },
 
   {
     id:3,
-    question:"Which Python data structure is immutable and ordered?",
-    options:["List","Dictionary","Tuple","Set"],
-    correctAnswer:2,
-    explanation:"Tuples are ordered and immutable in Python."
+    question:"What is the average time complexity of QuickSort?",
+    options:["O(n)","O(log n)","O(n^2)","O(n log n)"],
+    correctAnswer:3,
+    explanation:"QuickSort has an average complexity of O(n log n)."
   },
 
   {
     id:4,
-    question:"What does `__init__` represent in a Python class?",
+    question:"In a Binary Search Tree, where are values greater than the root placed?",
     options:[
-      "Destructor method",
-      "Class constructor",
-      "Module initializer",
-      "String representation"
+      "Left subtree",
+      "Right subtree",
+      "Root level",
+      "Not allowed"
     ],
     correctAnswer:1,
-    explanation:"__init__ is the constructor method automatically called when creating objects."
+    explanation:"Values greater than the root are placed in the right subtree."
   },
 
   {
     id:5,
-    question:"Which module in Python is used for working with JSON data?",
-    options:["pickle","json","csv","xml"],
+    question:"Dynamic Programming is primarily based on which concept?",
+    options:["Greedy choice","Memoization and overlapping subproblems","Backtracking","Divide and conquer"],
     correctAnswer:1,
-    explanation:"The json module is used to parse and generate JSON data."
+    explanation:"Dynamic Programming uses memoization and overlapping subproblems."
   }
 
 ];

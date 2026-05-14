@@ -28,8 +28,6 @@
       margin:auto;
     }
 
-    /* TOP BAR */
-
     .top-bar{
       display:flex;
       justify-content:space-between;
@@ -57,8 +55,6 @@
       font-weight:bold;
     }
 
-    /* TITLE */
-
     .course-title{
       text-align:center;
       margin-bottom:30px;
@@ -68,14 +64,10 @@
       font-size:32px;
     }
 
-    /* LAYOUT */
-
     .quiz-layout{
       display:flex;
       gap:25px;
     }
-
-    /* SIDEBAR */
 
     .sidebar{
       width:220px;
@@ -104,26 +96,11 @@
       transition:0.3s;
     }
 
-    .q-btn.active{
-      background:#7c3aed;
-      color:white;
-    }
+    .q-btn.active{ background:#7c3aed; color:white; }
+    .q-btn.correct{ background:rgba(16,185,129,0.2); color:#34d399; }
+    .q-btn.incorrect{ background:rgba(239,68,68,0.2); color:#f87171; }
 
-    .q-btn.correct{
-      background:rgba(16,185,129,0.2);
-      color:#34d399;
-    }
-
-    .q-btn.incorrect{
-      background:rgba(239,68,68,0.2);
-      color:#f87171;
-    }
-
-    /* QUESTION */
-
-    .question-area{
-      flex:1;
-    }
+    .question-area{ flex:1; }
 
     .question-card{
       background:rgba(255,255,255,0.03);
@@ -169,9 +146,7 @@
       font-size:15px;
     }
 
-    .option:hover{
-      border-color:#7c3aed;
-    }
+    .option:hover{ border-color:#7c3aed; }
 
     .option.correct{
       background:rgba(16,185,129,0.15);
@@ -185,48 +160,30 @@
       color:#f87171;
     }
 
-    /* FEEDBACK */
-
+    /* ADDED ONLY */
     .feedback-box{
-      margin-top:10px;
-      padding:20px;
-      border-radius:16px;
-      border:1px solid rgba(239,68,68,0.35);
-      background:rgba(239,68,68,0.12);
-      animation:fadeIn .3s ease;
+      margin-top:20px;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(239,68,68,0.4);
+      background:rgba(239,68,68,0.1);
+      display:none;
     }
 
     .feedback-title{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:20px;
+      gap:8px;
       font-weight:bold;
-      margin-bottom:12px;
       color:#f87171;
+      margin-bottom:10px;
     }
 
     .feedback-box p{
       color:#d1d5db;
-      line-height:1.7;
-      font-size:15px;
+      font-size:14px;
+      line-height:1.6;
     }
-
-    @keyframes fadeIn{
-
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
-
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-
-    }
-
-    /* RESULT */
 
     .result-box{
       text-align:center;
@@ -250,15 +207,8 @@
     }
 
     @media(max-width:900px){
-
-      .quiz-layout{
-        flex-direction:column;
-      }
-
-      .sidebar{
-        width:100%;
-      }
-
+      .quiz-layout{ flex-direction:column; }
+      .sidebar{ width:100%; }
     }
 
   </style>
@@ -268,10 +218,7 @@
 
 <div class="main">
 
-  <!-- TOP -->
-
   <div class="top-bar">
-
     <a href="#" class="back-btn">
       <i class="ri-arrow-left-line"></i>
       Back to Courses
@@ -281,193 +228,117 @@
       <i class="ri-trophy-line"></i>
       <span id="scoreText">0/5 Correct</span>
     </div>
-
   </div>
-
-  <!-- TITLE -->
 
   <div class="course-title">
-    <h1>Complete Python Programming</h1>
+    <h1>Vue.js 3 From Zero to Hero</h1>
   </div>
-
-  <!-- LAYOUT -->
 
   <div class="quiz-layout">
 
-    <!-- SIDEBAR -->
-
     <div class="sidebar">
-
       <div class="sidebar-card">
-
         <h3>Exercises</h3>
-
         <div id="questionList"></div>
-
       </div>
-
     </div>
-
-    <!-- QUESTION -->
 
     <div class="question-area">
 
       <div class="question-card">
 
         <div class="question-header">
-
-          <div class="label" id="questionLabel">
-            Question 1/5
-          </div>
-
-          <h2 id="questionText">
-            Loading...
-          </h2>
-
+          <div class="label" id="questionLabel">Question 1/5</div>
+          <h2 id="questionText">Loading...</h2>
         </div>
 
         <div class="options" id="optionsList"></div>
-
       </div>
 
-      <!-- RESULT -->
+      <!-- ADDED -->
+      <div class="feedback-box" id="feedbackBox">
+        <div class="feedback-title">
+          <i class="ri-close-circle-line"></i>
+          Incorrect Answer
+        </div>
+        <p id="feedbackText"></p>
+      </div>
 
       <div class="result-box" id="resultBox">
-
         <h2 id="finalScore"></h2>
-
         <p id="message"></p>
-
-        <button class="retry-btn" onclick="restartQuiz()">
-          Try Again
-        </button>
-
+        <button class="retry-btn" onclick="restartQuiz()">Try Again</button>
       </div>
 
     </div>
 
   </div>
-
 </div>
 
 <script>
 
 const questions = [
-
   {
     id:1,
-    question:"Which of the following is used to define a function in Python?",
-    options:["function","def","func","define"],
-    correctAnswer:1,
-    explanation:"The 'def' keyword is used to define functions in Python."
+    question:"Which API is the modern way to write Vue 3 components?",
+    options:["Options API","Class API","Composition API","Functional API"],
+    correctAnswer:2,
+    explanation:"Composition API is the modern Vue 3 approach."
   },
-
   {
     id:2,
-    question:"What is the output of `print(type([]))` in Python?",
-    options:[
-      "<class 'list'>",
-      "<class 'array'>",
-      "<class 'tuple'>",
-      "<class 'dict'>"
-    ],
-    correctAnswer:0,
-    explanation:"An empty square bracket [] creates a list object in Python."
+    question:"What does `ref()` create in Vue 3?",
+    options:["A DOM reference","A reactive references with `.value`","A computed property","A watcher"],
+    correctAnswer:1,
+    explanation:"ref() creates a reactive value stored in .value"
   },
-
   {
     id:3,
-    question:"Which Python data structure is immutable and ordered?",
-    options:["List","Dictionary","Tuple","Set"],
+    question:"Which directive is used for two-way data binding in Vue?",
+    options:["v-bind","v-on","v-model","v-if"],
     correctAnswer:2,
-    explanation:"Tuples are ordered and immutable in Python."
+    explanation:"v-model is used for two-way binding."
   },
-
   {
     id:4,
-    question:"What does `__init__` represent in a Python class?",
-    options:[
-      "Destructor method",
-      "Class constructor",
-      "Module initializer",
-      "String representation"
-    ],
+    question:"What is Pinia in the Vue ecosystem?",
+    options:["A router","A state managment library","A UI component library","A build tool"],
     correctAnswer:1,
-    explanation:"__init__ is the constructor method automatically called when creating objects."
+    explanation:"Pinia is Vue’s official state management library."
   },
-
   {
     id:5,
-    question:"Which module in Python is used for working with JSON data?",
-    options:["pickle","json","csv","xml"],
+    question:"What does `<Teleport>` do in Vue 3?",
+    options:["Routes to a new page","Renders content to a diffrent DOM location","Animates transitions","Fetches remote data"],
     correctAnswer:1,
-    explanation:"The json module is used to parse and generate JSON data."
+    explanation:"Teleport renders content outside current DOM hierarchy."
   }
-
 ];
 
 let currentIndex = 0;
-
 let answers = {};
 
 function correctCount(){
-
   let count = 0;
-
   for(let i in answers){
-
-    if(answers[i].correct){
-
-      count++;
-
-    }
-
+    if(answers[i].correct) count++;
   }
-
   return count;
-
 }
 
 function renderSidebar(){
-
   const list = document.getElementById("questionList");
-
   list.innerHTML = "";
 
   questions.forEach((q,index)=>{
-
     let cls = "q-btn";
-
     const ans = answers[q.id];
 
-    if(index === currentIndex){
+    if(index === currentIndex) cls += " active";
+    if(ans) cls += ans.correct ? " correct" : " incorrect";
 
-      cls += " active";
-
-    }
-
-    if(ans){
-
-      if(ans.correct){
-
-        cls += " correct";
-
-      }else{
-
-        cls += " incorrect";
-
-      }
-
-    }
-
-    list.innerHTML += `
-      <button class="${cls}">
-        Question ${index + 1}
-      </button>
-    `;
-
+    list.innerHTML += `<button class="${cls}">Question ${index+1}</button>`;
   });
-
 }
 
 function renderQuestion(){
@@ -477,118 +348,65 @@ function renderQuestion(){
   document.getElementById("questionLabel").innerText =
   `Question ${currentIndex + 1}/5`;
 
-  document.getElementById("questionText").innerText =
-  q.question;
+  document.getElementById("questionText").innerText = q.question;
 
-  const optionsBox = document.getElementById("optionsList");
+  const box = document.getElementById("optionsList");
+  box.innerHTML = "";
 
-  optionsBox.innerHTML = "";
+  document.getElementById("feedbackBox").style.display = "none";
 
   q.options.forEach((option,index)=>{
 
     const ans = answers[q.id];
+    const selected = ans && ans.selected === index;
+    const answered = ans && ans.selected !== null;
 
-    const isSelected = ans && ans.selected === index;
-
-    const hasAnswered = ans && ans.selected !== null;
-
-    const isCorrect =
-      hasAnswered && index === q.correctAnswer;
-
-    const isWrong =
-      hasAnswered &&
-      isSelected &&
-      index !== q.correctAnswer;
+    const correct = answered && index === q.correctAnswer;
+    const wrong = answered && selected && index !== q.correctAnswer;
 
     let cls = "option";
+    if(correct) cls += " correct";
+    else if(wrong) cls += " incorrect";
 
-    if(isCorrect){
-
-      cls += " correct";
-
-    }else if(isWrong){
-
-      cls += " incorrect";
-
-    }
-
-    optionsBox.innerHTML += `
+    box.innerHTML += `
       <button class="${cls}" onclick="selectOption(${index})">
-
-        ${option.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-
+        ${option}
       </button>
     `;
-
   });
-
-  const ans = answers[q.id];
-
-  if(ans && !ans.correct){
-
-    optionsBox.innerHTML += `
-
-      <div class="feedback-box">
-
-        <div class="feedback-title">
-
-          <i class="ri-close-circle-line"></i>
-
-          Incorrect
-
-        </div>
-
-        <p>
-          ${q.explanation}
-        </p>
-
-      </div>
-
-    `;
-
-  }
 
   document.getElementById("scoreText").innerText =
   `${correctCount()}/5 Correct`;
-
 }
 
 function selectOption(index){
 
   const q = questions[currentIndex];
-
   if(answers[q.id]) return;
 
   answers[q.id] = {
-
     selected:index,
-
     correct:index === q.correctAnswer
-
   };
 
   renderQuestion();
-
   renderSidebar();
 
-  setTimeout(() => {
+  //  ONLY ADDITION
+  if(index !== q.correctAnswer){
+    document.getElementById("feedbackBox").style.display = "block";
+    document.getElementById("feedbackText").innerText = q.explanation;
+  }
 
+  setTimeout(()=>{
     if(currentIndex < questions.length - 1){
-
       currentIndex++;
-
       renderQuestion();
-
       renderSidebar();
-
     }else{
-
       finishQuiz();
-
     }
-
-  }, 1500);
-
+  },1000);
 }
 
 function finishQuiz(){
@@ -600,42 +418,24 @@ function finishQuiz(){
   document.getElementById("finalScore").innerText =
   `Score: ${score}/${questions.length}`;
 
-  let msg = "";
-
-  if(score === questions.length){
-
-    msg = "Perfect! Well done!";
-
-  }else if(score >= questions.length / 2){
-
-    msg = "Good job! Keep learning.";
-
-  }else{
-
-    msg = "Keep practicing!";
-
-  }
-
-  document.getElementById("message").innerText = msg;
-
+  document.getElementById("message").innerText =
+  score === questions.length
+    ? "Perfect!"
+    : score >= questions.length/2
+      ? "Good job!"
+      : "Keep practicing!";
 }
 
 function restartQuiz(){
-
   currentIndex = 0;
-
   answers = {};
-
   document.getElementById("resultBox").style.display = "none";
-
+  document.getElementById("feedbackBox").style.display = "none";
   renderQuestion();
-
   renderSidebar();
-
 }
 
 renderQuestion();
-
 renderSidebar();
 
 </script>

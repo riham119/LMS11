@@ -185,45 +185,29 @@
       color:#f87171;
     }
 
-    /* FEEDBACK */
-
+    /* 🔴 ADDED: FEEDBACK BOX */
     .feedback-box{
-      margin-top:10px;
-      padding:20px;
-      border-radius:16px;
-      border:1px solid rgba(239,68,68,0.35);
-      background:rgba(239,68,68,0.12);
-      animation:fadeIn .3s ease;
+      margin-top:20px;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(239,68,68,0.4);
+      background:rgba(239,68,68,0.1);
+      display:none;
     }
 
     .feedback-title{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:20px;
+      gap:8px;
       font-weight:bold;
-      margin-bottom:12px;
       color:#f87171;
+      margin-bottom:10px;
     }
 
     .feedback-box p{
       color:#d1d5db;
-      line-height:1.7;
-      font-size:15px;
-    }
-
-    @keyframes fadeIn{
-
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
-
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-
+      font-size:14px;
+      line-height:1.6;
     }
 
     /* RESULT */
@@ -250,7 +234,6 @@
     }
 
     @media(max-width:900px){
-
       .quiz-layout{
         flex-direction:column;
       }
@@ -258,7 +241,6 @@
       .sidebar{
         width:100%;
       }
-
     }
 
   </style>
@@ -267,8 +249,6 @@
 <body>
 
 <div class="main">
-
-  <!-- TOP -->
 
   <div class="top-bar">
 
@@ -284,31 +264,18 @@
 
   </div>
 
-  <!-- TITLE -->
-
   <div class="course-title">
-    <h1>Complete Python Programming</h1>
+    <h1>TypeScript Mastery</h1>
   </div>
-
-  <!-- LAYOUT -->
 
   <div class="quiz-layout">
 
-    <!-- SIDEBAR -->
-
     <div class="sidebar">
-
       <div class="sidebar-card">
-
         <h3>Exercises</h3>
-
         <div id="questionList"></div>
-
       </div>
-
     </div>
-
-    <!-- QUESTION -->
 
     <div class="question-area">
 
@@ -320,9 +287,7 @@
             Question 1/5
           </div>
 
-          <h2 id="questionText">
-            Loading...
-          </h2>
+          <h2 id="questionText">Loading...</h2>
 
         </div>
 
@@ -330,18 +295,21 @@
 
       </div>
 
-      <!-- RESULT -->
+      <!--  ADDED -->
+      <div class="feedback-box" id="feedbackBox">
+        <div class="feedback-title">
+          <i class="ri-close-circle-line"></i>
+          Incorrect Answer
+        </div>
+        <p id="feedbackText"></p>
+      </div>
 
       <div class="result-box" id="resultBox">
-
         <h2 id="finalScore"></h2>
-
         <p id="message"></p>
-
         <button class="retry-btn" onclick="restartQuiz()">
           Try Again
         </button>
-
       </div>
 
     </div>
@@ -353,111 +321,79 @@
 <script>
 
 const questions = [
-
   {
     id:1,
-    question:"Which of the following is used to define a function in Python?",
-    options:["function","def","func","define"],
-    correctAnswer:1,
-    explanation:"The 'def' keyword is used to define functions in Python."
+    question:"Which keyword is used to define a type alias in TypeScript?",
+    options:["type","interface ","class","enum"],
+    correctAnswer:0,
+    explanation:"type is used to create type aliases in TypeScript."
   },
 
   {
     id:2,
-    question:"What is the output of `print(type([]))` in Python?",
-    options:[
-      "<class 'list'>",
-      "<class 'array'>",
-      "<class 'tuple'>",
-      "<class 'dict'>"
-    ],
-    correctAnswer:0,
-    explanation:"An empty square bracket [] creates a list object in Python."
+    question:"What does the `?` operator indicate in TypeScript?",
+    options:["Temary operator only","Bitwise operator","Logical NOT","Optional property or chaining"],
+    correctAnswer:3,
+    explanation:"It is used for optional properties or optional chaining."
   },
 
   {
     id:3,
-    question:"Which Python data structure is immutable and ordered?",
-    options:["List","Dictionary","Tuple","Set"],
+    question:"What is a generic in TypeScript?",
+    options:["A default type","An imported module ","A reusable type placeholder","A decorator"],
     correctAnswer:2,
-    explanation:"Tuples are ordered and immutable in Python."
+    explanation:"Generics allow reusable type-safe components."
   },
 
   {
     id:4,
-    question:"What does `__init__` represent in a Python class?",
+    question:"Which TypeScript compiler flag enables strict null checks?",
     options:[
-      "Destructor method",
-      "Class constructor",
-      "Module initializer",
-      "String representation"
+      "--nolmplicitAny",
+      "--noEmit",
+      "--esModuleinterop",
+      "--strictNullChecks"
     ],
-    correctAnswer:1,
-    explanation:"__init__ is the constructor method automatically called when creating objects."
+    correctAnswer:3,
+    explanation:"strictNullChecks prevents null/undefined errors."
   },
 
   {
     id:5,
-    question:"Which module in Python is used for working with JSON data?",
-    options:["pickle","json","csv","xml"],
+    question:"What does `keyof` do in TypeScript?",
+    options:["Create a new key","Returns a union of an object's keys as strings","Deletes a property","Locks an object"],
     correctAnswer:1,
-    explanation:"The json module is used to parse and generate JSON data."
+    explanation:"It creates a union of object keys."
   }
-
 ];
 
 let currentIndex = 0;
-
 let answers = {};
 
 function correctCount(){
-
   let count = 0;
-
   for(let i in answers){
-
     if(answers[i].correct){
-
       count++;
-
     }
-
   }
-
   return count;
-
 }
 
 function renderSidebar(){
-
   const list = document.getElementById("questionList");
-
   list.innerHTML = "";
 
   questions.forEach((q,index)=>{
-
     let cls = "q-btn";
-
     const ans = answers[q.id];
 
     if(index === currentIndex){
-
       cls += " active";
-
     }
 
     if(ans){
-
-      if(ans.correct){
-
-        cls += " correct";
-
-      }else{
-
-        cls += " incorrect";
-
-      }
-
+      cls += ans.correct ? " correct" : " incorrect";
     }
 
     list.innerHTML += `
@@ -465,9 +401,7 @@ function renderSidebar(){
         Question ${index + 1}
       </button>
     `;
-
   });
-
 }
 
 function renderQuestion(){
@@ -481,76 +415,33 @@ function renderQuestion(){
   q.question;
 
   const optionsBox = document.getElementById("optionsList");
-
   optionsBox.innerHTML = "";
+
+  document.getElementById("feedbackBox").style.display = "none";
 
   q.options.forEach((option,index)=>{
 
     const ans = answers[q.id];
-
     const isSelected = ans && ans.selected === index;
-
     const hasAnswered = ans && ans.selected !== null;
 
-    const isCorrect =
-      hasAnswered && index === q.correctAnswer;
-
-    const isWrong =
-      hasAnswered &&
-      isSelected &&
-      index !== q.correctAnswer;
+    const isCorrect = hasAnswered && index === q.correctAnswer;
+    const isWrong = hasAnswered && isSelected && index !== q.correctAnswer;
 
     let cls = "option";
 
-    if(isCorrect){
-
-      cls += " correct";
-
-    }else if(isWrong){
-
-      cls += " incorrect";
-
-    }
+    if(isCorrect) cls += " correct";
+    else if(isWrong) cls += " incorrect";
 
     optionsBox.innerHTML += `
       <button class="${cls}" onclick="selectOption(${index})">
-
-        ${option.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-
+        ${option}
       </button>
     `;
-
   });
-
-  const ans = answers[q.id];
-
-  if(ans && !ans.correct){
-
-    optionsBox.innerHTML += `
-
-      <div class="feedback-box">
-
-        <div class="feedback-title">
-
-          <i class="ri-close-circle-line"></i>
-
-          Incorrect
-
-        </div>
-
-        <p>
-          ${q.explanation}
-        </p>
-
-      </div>
-
-    `;
-
-  }
 
   document.getElementById("scoreText").innerText =
   `${correctCount()}/5 Correct`;
-
 }
 
 function selectOption(index){
@@ -560,39 +451,31 @@ function selectOption(index){
   if(answers[q.id]) return;
 
   answers[q.id] = {
-
     selected:index,
-
     correct:index === q.correctAnswer
-
   };
 
   renderQuestion();
-
   renderSidebar();
 
-  setTimeout(() => {
+  //  ADDED ONLY THIS PART
+  if(index !== q.correctAnswer){
+    document.getElementById("feedbackBox").style.display = "block";
+    document.getElementById("feedbackText").innerText = q.explanation;
+  }
 
+  setTimeout(()=>{
     if(currentIndex < questions.length - 1){
-
       currentIndex++;
-
       renderQuestion();
-
       renderSidebar();
-
     }else{
-
       finishQuiz();
-
     }
-
-  }, 1500);
-
+  },1000);
 }
 
 function finishQuiz(){
-
   document.getElementById("resultBox").style.display = "block";
 
   const score = correctCount();
@@ -600,42 +483,24 @@ function finishQuiz(){
   document.getElementById("finalScore").innerText =
   `Score: ${score}/${questions.length}`;
 
-  let msg = "";
-
-  if(score === questions.length){
-
-    msg = "Perfect! Well done!";
-
-  }else if(score >= questions.length / 2){
-
-    msg = "Good job! Keep learning.";
-
-  }else{
-
-    msg = "Keep practicing!";
-
-  }
-
-  document.getElementById("message").innerText = msg;
-
+  document.getElementById("message").innerText =
+  score === questions.length
+    ? "Perfect!"
+    : score >= questions.length/2
+      ? "Good job!"
+      : "Keep practicing!";
 }
 
 function restartQuiz(){
-
   currentIndex = 0;
-
   answers = {};
-
   document.getElementById("resultBox").style.display = "none";
-
+  document.getElementById("feedbackBox").style.display = "none";
   renderQuestion();
-
   renderSidebar();
-
 }
 
 renderQuestion();
-
 renderSidebar();
 
 </script>

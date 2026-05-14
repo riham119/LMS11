@@ -287,7 +287,7 @@
   <!-- TITLE -->
 
   <div class="course-title">
-    <h1>Complete Python Programming</h1>
+    <h1>CSS & Tailwind Design Systems</h1>
   </div>
 
   <!-- LAYOUT -->
@@ -356,52 +356,42 @@ const questions = [
 
   {
     id:1,
-    question:"Which of the following is used to define a function in Python?",
-    options:["function","def","func","define"],
-    correctAnswer:1,
-    explanation:"The 'def' keyword is used to define functions in Python."
+    question:"Which CSS property controls the space between flex items?",
+    options:["align-items","justify-content","gap","flex-wrap"],
+    correctAnswer:2,
+    explanation:"The correct answer is `gap` because it adds spacing between flex items."
   },
 
   {
     id:2,
-    question:"What is the output of `print(type([]))` in Python?",
-    options:[
-      "<class 'list'>",
-      "<class 'array'>",
-      "<class 'tuple'>",
-      "<class 'dict'>"
-    ],
-    correctAnswer:0,
-    explanation:"An empty square bracket [] creates a list object in Python."
+    question:"What does `display: grid` create?",
+    options:["A horizontal layout","A two-dimensional layout system","An inline element","A table layout"],
+    correctAnswer:1,
+    explanation:"`display: grid` creates a two-dimensional layout system."
   },
 
   {
     id:3,
-    question:"Which Python data structure is immutable and ordered?",
-    options:["List","Dictionary","Tuple","Set"],
-    correctAnswer:2,
-    explanation:"Tuples are ordered and immutable in Python."
+    question:"Which Tailwind class applies a 1rem margin on all sides?",
+    options:["m-2","mx-4","p-4","m-4"],
+    correctAnswer:3,
+    explanation:"`m-4` applies margin on all sides."
   },
 
   {
     id:4,
-    question:"What does `__init__` represent in a Python class?",
-    options:[
-      "Destructor method",
-      "Class constructor",
-      "Module initializer",
-      "String representation"
-    ],
+    question:"What CSS unit is relative to the root element's font size?",
+    options:["em","rem","vh","px"],
     correctAnswer:1,
-    explanation:"__init__ is the constructor method automatically called when creating objects."
+    explanation:"`rem` is relative to the root element font size."
   },
 
   {
     id:5,
-    question:"Which module in Python is used for working with JSON data?",
-    options:["pickle","json","csv","xml"],
+    question:"Which Tailwind directive is used to add custom CSS?",
+    options:["@tailwind","@apply","layer","@import"],
     correctAnswer:1,
-    explanation:"The json module is used to parse and generate JSON data."
+    explanation:"`@apply` lets you use Tailwind utility classes inside custom CSS."
   }
 
 ];
